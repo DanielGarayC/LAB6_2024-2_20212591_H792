@@ -29,7 +29,7 @@ public class PeliculaController {
 
     @GetMapping("/Pelicula/ver/{id}")
     public String verDetallesPelicula(@PathVariable("id") int id) {
-        return "Directores/detallesPelicula";
+        return "Peliculas/detallesPelicula";
     }
 
     @GetMapping("/Pelicula/crear")
