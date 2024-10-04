@@ -31,6 +31,11 @@ public class DirectorController {
         return "Directores/listaDirectores";
     }
 
+    @GetMapping("/Director/ver")
+    public String verDetallesDirector(@RequestParam("id") int id) {
+        return "Directores/detallesDirector";
+    }
+
     @GetMapping("/Director/crear")
     public String crearDirector(@ModelAttribute("director") Director director) {
         return "Directores/formDirector";
@@ -53,6 +58,42 @@ public class DirectorController {
 
     @PostMapping("/Director/guardar")
     public String guardarDirector(@ModelAttribute("director") @Valid Director director, BindingResult bindingResult, Model model, RedirectAttributes attr) {
+        if(bindingResult.hasErrors()){
+            if(director.getId() != 0){
+                Optional<Director> optionalDirector = directorRepository.findById(director.getId());
+                if(optionalDirector.isPresent()){
+                    director = optionalDirector.get();
+                    model.addAttribute("director",director);
+                }
+            }
+            return "Directores/formDirector";
+        }else {
+            try {
+                if (director.getId() == 0) {
+                    attr.addFlashAttribute("msg", "Director creado exitosamente");
+                } else {
+                    attr.addFlashAttribute("msg", "Director actualizado exitosamente");
+                }
+                directorRepository.save(director);
+                return "redirect:/Director/lista";
+            } catch (Exception e) {
+                attr.addFlashAttribute("error", "Ocurrió un error al gestionar el director");
+                e.printStackTrace();
+            }
+        }
         return "redirect:/Director/lista";
+    }
+
+    @GetMapping("/Director/borrar")
+    public String borrarDirector(Model model, @RequestParam("id") int id, RedirectAttributes attr) {
+
+        Optional<Director> optionalDirector = directorRepository.findById(id);
+
+        if (optionalDirector.isPresent()) {
+            directorRepository.deleteById(id);
+            attr.addFlashAttribute("msg", "Director borrado exitosamente");
+        }
+        return "redirect:/Director/lista";
+
     }
 }
