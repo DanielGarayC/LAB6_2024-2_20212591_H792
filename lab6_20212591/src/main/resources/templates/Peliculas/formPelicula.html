@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pelicula.id==0? 'Nueva Pelicula':'Editar Pelicula'}"> ></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<main>
+    <div class="container mt-5">
+        <h1 class="mb-4" th:text="${pelicula.id==0? 'Nueva Pelicula':'Editar Pelicula'}"> </h1>
+        <form th:action="@{/Pelicula/guardar}" th:object="${pelicula}" method="post" >
+            <div class="mb-3">
+                <label  class="form-label">Titulo</label>
+                <input type="text" class="form-control"  th:field="${titulo}" th:classappend="${#fields.hasErrors('titulo')?'is-invalid':''}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" ></div>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Fecha de estreno</label>
+                <input type="text" class="form-control"  th:field="${fechaestreno}" th:classappend="${#fields.hasErrors('fechaestreno')?'is-invalid':''}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('fechaestreno')}" th:errors="*{fechaestreno}" ></div>
+            </div>
+            <div class="mb-3">
+                <label  class="form-label">Duración</label>
+                <input type="text" class="form-control"  th:field="${duracionminutos}" th:classappend="${#fields.hasErrors('duracionminutos')?'is-invalid':''}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('duracionminutos')}" th:errors="*{duracionminutos}" ></div>
+            </div>
+
+            <a th:href="@{'/Pelicula/lista'}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary"
+                    th:text="${pelicula.id==0? 'Guardar':'Actualizar'}">Actualizar
+            </button>
+        </form>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
