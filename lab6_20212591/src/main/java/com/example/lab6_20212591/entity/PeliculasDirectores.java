@@ -16,13 +16,13 @@ public class PeliculasDirectores {
     @EmbeddedId
     private PeliculasDirectoresId id;
 
-    @MapsId("eventoId")
+    @MapsId("peliculaId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "eventoId", nullable = false)
+    @JoinColumn(name = "peliculaId", nullable = false)
     private Pelicula pelicula;
 
-    @MapsId("artistaId")
+    @MapsId("directorId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "artistaId", nullable = false)
+    @JoinColumn(name = "directorId", nullable = false)
     private Director director;
 }

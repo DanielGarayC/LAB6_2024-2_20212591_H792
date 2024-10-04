@@ -32,19 +32,19 @@
                 <td th:text="${director.telefono}"></td>
                 <td th:text="${director.nacionalidad}"></td>
                 <td>
-                    <button th:href="@{'/Director/ver' + '?id=' + ${director.id}}" type="button" class="btn btn-outline-primary" title="Ver director">
+                    <a th:href="@{/Director/ver/{id}(id=${director.id})}" type="button" class="btn btn-outline-primary" title="Ver película">
                         <i class="fas fa-eye"></i>
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button th:href="@{'/Director/editar' + '?id=' + ${director.id}}" type="button" class="btn btn-outline-success" title="Editar director">
+                    <a th:href="@{/Director/editar/{id}(id=${director.id})}" type="button" class="btn btn-outline-success" title="Editar película">
                         <i class="fas fa-edit"></i>
-                    </button>
+                    </a>
                 </td>
                 <td>
-                    <button th:href="@{'/Director/borrar' + '?id=' + ${director.id}}" type="button" class="btn btn-outline-danger " title="Eliminar director">
+                    <a th:href="@{/Director/borrar/{id}(id=${director.id})}" type="button" class="btn btn-outline-danger " title="Eliminar película">
                         <i class="fas fas fa-trash"></i>
-                    </button>
+                    </a>
                 </td>
             </tr>
 

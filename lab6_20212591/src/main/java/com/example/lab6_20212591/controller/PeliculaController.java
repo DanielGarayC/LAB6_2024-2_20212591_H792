@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Optional;
@@ -30,8 +27,8 @@ public class PeliculaController {
         return "Peliculas/listaPeliculas";
     }
 
-    @GetMapping("/Pelicula/ver")
-    public String verDetallesPelicula(@RequestParam("id") int id) {
+    @GetMapping("/Pelicula/ver/{id}")
+    public String verDetallesPelicula(@PathVariable("id") int id) {
         return "Directores/detallesPelicula";
     }
 
@@ -40,9 +37,9 @@ public class PeliculaController {
         return "Peliculas/formPelicula";
     }
 
-    @GetMapping("/Pelicula/editar")
+    @GetMapping("/Pelicula/editar/{id}")
     public String editarPelicula(@ModelAttribute("pelicula") Pelicula pelicula, Model model,
-                                      @RequestParam("id") int id) {
+                                      @PathVariable("id") int id) {
 
         Optional<Pelicula> optionalPelicula = peliculaRepository.findById(id);
 
@@ -83,8 +80,8 @@ public class PeliculaController {
         return "redirect:/Pelicula/lista";
     }
 
-    @GetMapping("/Pelicula/borrar")
-    public String borrarPelicula(Model model, @RequestParam("id") int id, RedirectAttributes attr) {
+    @GetMapping("/Pelicula/borrar/{id}")
+    public String borrarPelicula(Model model, @PathVariable("id") int id, RedirectAttributes attr) {
 
         Optional<Pelicula> optionalPelicula = peliculaRepository.findById(id);
 
